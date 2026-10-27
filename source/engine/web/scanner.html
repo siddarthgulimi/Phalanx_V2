@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Site scanner · Phalanx</title>
+<link rel="icon" href="/img/icon.png" />
+<link rel="stylesheet" href="/shared/palette.css" />
+<link rel="stylesheet" href="/shared/ui.css" />
+<link rel="stylesheet" href="/css/app.css" />
+<script src="/shared/edition.js"></script>
+<script src="/js/boot.js"></script>
+</head>
+<body>
+<main id="page">
+  <div class="card">
+    <h3>Check any website before you open it</h3>
+    <p class="dim" style="margin:0 0 12px">Paste a link. Phalanx runs the same checks it uses on every page you visit — instantly and offline.</p>
+    <form class="row" id="urlForm" style="flex-wrap:wrap">
+      <input type="url" id="url" class="grow" placeholder="https://example.com/login" style="min-width:280px" required />
+      <button class="btn primary" type="submit">Scan website</button>
+    </form>
+    <div class="row" style="flex-wrap:wrap;gap:6px;margin-top:10px"><span class="dim" style="font-size:.85em">Try:</span>
+      <button class="btn sm ex" data-u="https://mail.google.com/mail/u/0/">Gmail</button>
+      <button class="btn sm ex" data-u="https://thepiratebay.org/search.php?q=movie">The Pirate Bay</button>
+      <button class="btn sm ex" data-u="http://paypal-secure-login.verify-account.tk/signin">Fake PayPal login</button>
+      <button class="btn sm ex" data-u="https://xn--pple-43d.com/">Look-alike "apple"</button>
+      <button class="btn sm ex" data-u="http://185.62.190.12/update.exe">Raw IP address</button>
+      <button class="btn sm ex" data-u="https://bit.ly/3xYz">Link shortener</button>
+    </div>
+  </div>
+  <div id="urlResult"></div>
+
+  <div class="grid g2">
+    <div class="card">
+      <h3>Check a downloaded file name</h3>
+      <p class="dim" style="margin:0 0 12px">Spot disguised executables and cracked software before you open them.</p>
+      <form class="grid" id="fileForm" style="gap:8px">
+        <input type="text" id="fname" placeholder="invoice.pdf.exe" required />
+        <input type="url" id="fsrc" placeholder="Where it came from (optional) https://…" />
+        <button class="btn primary" type="submit" style="justify-self:start">Check file</button>
+      </form>
+      <div id="fileResult" style="margin-top:12px"></div>
+    </div>
+    <div class="card">
+      <h3>Test lab — show it to your tester</h3>
+      <p class="dim" style="margin:0 0 10px">Opens a safe practice page in your normal browser (where the extension runs). Each button simulates one attack so you can watch Phalanx detect it live, at each sensitivity level.</p>
+      <ul style="margin:0 0 12px;padding-left:20px">
+        <li>Fake login forms, form hijacking &amp; clickjacking</li>
+        <li>Malicious scripts and hidden frames</li>
+        <li>Phishing, piracy and raw-IP websites</li>
+        <li>Disguised <span class="code">.pdf.exe</span> and "crack" downloads (harmless text files)</li>
+      </ul>
+      <button class="btn primary" id="openLab2">Open Test lab ↗</button>
+    </div>
+  </div>
+</main>
+<script src="/shared/intel.js"></script>
+<script src="/shared/analysis.js"></script>
+<script src="/shared/report-view.js"></script>
+<script src="/js/charts.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/scanner.js"></script>
+</body>
+</html>

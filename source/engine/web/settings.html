@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Settings · Phalanx</title>
+<link rel="icon" href="/img/icon.png" />
+<link rel="stylesheet" href="/shared/palette.css" />
+<link rel="stylesheet" href="/shared/ui.css" />
+<link rel="stylesheet" href="/css/app.css" />
+<script src="/shared/edition.js"></script>
+<script src="/js/boot.js"></script>
+</head>
+<body>
+<main id="page">
+  <div class="grid" style="grid-template-columns:190px 1fr;align-items:start">
+    <nav class="set-nav card" style="padding:8px">
+      <a href="#appearance">Appearance</a><a href="#protection">Protection</a><a href="#notifications">Notifications</a>
+      <a href="#performance">Performance</a><a href="#sites">Trusted &amp; blocked sites</a><a href="#storage">Storage &amp; cache</a>
+      <a href="#account">Account</a><a href="#danger">Danger zone</a>
+    </nav>
+    <div class="grid">
+      <section class="card set-section" id="appearance">
+        <h3>Appearance</h3>
+        <div class="set-row"><div><div class="t">Theme</div><div class="d">Changes instantly here and in the browser extension.</div></div>
+          <div class="seg" data-key="theme"><button data-v="dark">Dark</button><button data-v="light">Light</button><button data-v="system">System</button></div></div>
+        <div class="set-row"><div><div class="t">Accent colour</div><div class="d" id="edDesc"></div></div><div class="seg" data-key="accent" id="accentSeg"></div></div>
+        <div class="set-row"><div><div class="t">Text size</div><div class="d">Larger text for readability on high-resolution screens.</div></div>
+          <div class="seg" data-key="size"><button data-v="small">Small</button><button data-v="normal">Normal</button><button data-v="large">Large</button></div></div>
+      </section>
+
+      <section class="card set-section" id="protection">
+        <h3>Protection</h3>
+        <div class="set-row"><div><div class="t">Detection sensitivity</div><div class="d">How suspicious something must be before you get an alert.</div></div>
+          <div class="seg" data-key="sensitivity"><button data-v="low">Low</button><button data-v="medium">Medium</button><button data-v="high">High</button></div></div>
+        <div style="padding:6px 0 10px"><table class="tbl" id="sensTable"></table></div>
+        <div class="set-row"><div><div class="t">Auto-quarantine</div><div class="d">Instantly stop <b>high &amp; critical</b> threats (remove the injected element, cancel the download, block the site). Lower-risk alerts always wait for your choice: Resolved, Quarantine or Threat analysis.</div></div>
+          <label class="switch"><input type="checkbox" data-key="autoQuarantine" /><span></span></label></div>
+        <div class="set-row"><div><div class="t">Site scanner</div><div class="d">Score every website address before the page loads.</div></div><label class="switch"><input type="checkbox" data-key="siteScan" /><span></span></label></div>
+        <div class="set-row"><div><div class="t">Download inspector</div><div class="d">Check file type, disguised extensions, source reputation and Chrome Safe Browsing verdicts.</div></div><label class="switch"><input type="checkbox" data-key="downloadScan" /><span></span></label></div>
+        <div class="set-row"><div><div class="t">Page (DOM) monitor</div><div class="d">Watch pages for injected login forms, scripts, hidden frames and overlays.</div></div><label class="switch"><input type="checkbox" data-key="domScan" /><span></span></label></div>
+      </section>
+
+      <section class="card set-section" id="notifications">
+        <h3>Notifications</h3>
+        <div class="set-row"><div><div class="t">Alert style</div><div class="d">All styles group alerts into one small box that disappears after <b>3 seconds</b> (hover to keep it open).</div></div>
+          <div class="seg" data-key="notifyStyle"><button data-v="toast">Compact in-page</button><button data-v="system">Windows notification</button><button data-v="silent">Silent (badge only)</button></div></div>
+      </section>
+
+      <section class="card set-section" id="performance">
+        <h3>Performance</h3>
+        <div class="set-row"><div><div class="t">Network telemetry</div><div class="d">Counts requests per minute for the dashboard graph. Turn off on older laptops for the lightest possible extension.</div></div>
+          <div class="seg" data-key="network"><button data-v="off">Off</button><button data-v="light">Light</button></div></div>
+        <div class="set-row"><div><div class="t">Keep engine running after closing the window</div><div class="d">Off = Phalanx exits ~30 s after you close the app (the extension keeps protecting and syncs later). On = always ready, uses ~15 MB RAM.</div></div>
+          <label class="switch"><input type="checkbox" data-key="keepRunning" /><span></span></label></div>
+        <div class="set-row"><div><div class="t">Keep history for</div><div class="d">Older entries are removed automatically at start-up.</div></div>
+          <div class="seg" data-key="historyDays"><button data-v="30">30 days</button><button data-v="90">90 days</button><button data-v="365">1 year</button><button data-v="0">Forever</button></div></div>
+        <div class="set-row"><div><div class="t">Engine resource use</div><div class="d" id="engineInfo"></div></div><span></span></div>
+      </section>
+
+      <section class="card set-section" id="sites">
+        <h3>Trusted &amp; blocked sites</h3>
+        <p class="dim" style="margin:0 0 10px;font-size:.9em">Popular services (Google, Gmail, Meet, Discord, Netflix, Microsoft, GitHub, banks, .gov.in …) are trusted automatically. Add your own here.</p>
+        <div class="grid g2">
+          <div><div class="label" style="margin-bottom:6px">Trusted (never flagged)</div><form class="row" id="allowForm"><input type="text" id="allowIn" class="grow" placeholder="example.com" /><button class="btn sm">Add</button></form><div id="allowList" style="margin-top:8px"></div></div>
+          <div><div class="label" style="margin-bottom:6px">Blocked (quarantined)</div><form class="row" id="blockForm"><input type="text" id="blockIn" class="grow" placeholder="bad-site.xyz" /><button class="btn sm">Add</button></form><div id="blockList" style="margin-top:8px"></div></div>
+        </div>
+      </section>
+
+      <section class="card set-section" id="storage">
+        <h3>Storage &amp; cache</h3>
+        <div class="set-row"><div class="grow"><div class="t">Data &amp; cache folder</div><div class="d mono" id="dataDir" style="word-break:break-all"></div><div class="d" id="defDir"></div></div>
+          <div class="row"><button class="btn sm" id="openData">Open folder</button></div></div>
+        <div class="row" style="flex-wrap:wrap;padding:8px 0 4px">
+          <input type="text" id="newDir" class="grow" placeholder="New folder, e.g. D:\PhalanxData" style="min-width:260px" />
+          <button class="btn sm" id="browse">Browse…</button><button class="btn sm primary" id="moveDir">Move data here</button><button class="btn sm ghost" id="resetDir">Use default</button>
+        </div>
+        <table class="tbl" style="margin-top:10px"><thead><tr><th style="width:30px"></th><th>What</th><th class="num">Size</th></tr></thead><tbody id="cacheRows"></tbody></table>
+        <div class="row" style="margin-top:10px;flex-wrap:wrap"><span class="dim grow" id="cacheTotal"></span>
+          <label class="row" style="gap:6px;font-size:.9em"><input type="checkbox" id="clearExt" checked /> Also clear the extension's local buffer</label>
+          <button class="btn primary" id="clearCache">Clear selected cache</button></div>
+      </section>
+
+      <section class="card set-section" id="account">
+        <h3>Account</h3>
+        <div class="set-row"><div><div class="t">Display name</div><div class="d">Shown on reports.</div></div><form class="row" id="nameForm"><input type="text" id="nameIn" /><button class="btn sm">Save</button></form></div>
+        <div class="set-row"><div><div class="t">Passcode</div><div class="d" id="passDesc">Protect the app with a passcode (optional).</div></div>
+          <form class="row" id="passForm" style="flex-wrap:wrap;justify-content:flex-end"><input type="password" id="curPass" placeholder="Current (if set)" style="width:150px" /><input type="password" id="newPass" placeholder="New (empty = none)" style="width:160px" /><button class="btn sm">Update</button></form></div>
+      </section>
+
+      <section class="card set-section" id="danger" style="border-color:color-mix(in srgb,var(--sev-critical) 40%,var(--border))">
+        <h3 style="color:var(--sev-critical)">Danger zone</h3>
+        <div class="set-row"><div><div class="t">Clear threat history</div><div class="d">Permanently deletes every recorded event in the app and the extension. Exported reports are not affected.</div></div><button class="btn danger" id="clearHist">Clear history…</button></div>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="/shared/intel.js"></script>
+<script src="/shared/analysis.js"></script>
+<script src="/shared/report-view.js"></script>
+<script src="/js/charts.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/settings.js"></script>
+</body>
+</html>

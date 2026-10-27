@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<title>Phalanx</title>
+<link rel="stylesheet" href="../lib/palette.css" />
+<link rel="stylesheet" href="../lib/ui.css" />
+<link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="brand"><span class="glyph"></span><span class="display name">Phalanx</span></div>
+    <span class="engine" id="engine" title="Desktop app link"><span class="dot" id="engineDot"></span><span id="engineTxt">App offline</span></span>
+  </header>
+
+  <section class="protect">
+    <div class="grow">
+      <div class="p-title" id="protTitle">Protection active</div>
+      <div class="dim small" id="protSub">Sensitivity: Medium · Auto-quarantine on</div>
+    </div>
+    <label class="switch" title="Pause / resume protection"><input type="checkbox" id="protToggle" checked /><span></span></label>
+  </section>
+
+  <section class="kpis">
+    <div class="kpi"><b id="kPending">0</b><span class="label">Pending</span></div>
+    <div class="kpi"><b id="kQuar">0</b><span class="label">Quarantined</span></div>
+    <div class="kpi"><b id="kSites">0</b><span class="label">Sites</span></div>
+    <div class="kpi"><b id="kDl">0</b><span class="label">Downloads</span></div>
+  </section>
+
+  <section class="alerts">
+    <button class="alerts-head" id="alertsHead" aria-expanded="false">
+      <span class="label">Notifications</span>
+      <span class="count" id="alertCount">0</span>
+      <span class="grow"></span>
+      <span class="chev">▾</span>
+    </button>
+    <div class="alerts-body" id="alertsBody">
+      <div class="alert-list" id="alertList"></div>
+      <div class="alerts-foot"><button class="btn ghost sm" id="clearDone">Clear handled</button></div>
+    </div>
+  </section>
+
+  <section class="net">
+    <div class="row"><span class="label">Network activity</span><span class="grow"></span><span class="mono small dim" id="netRate">0 req/min</span></div>
+    <svg id="spark" viewBox="0 0 300 40" preserveAspectRatio="none" aria-label="Requests per minute, last 30 minutes"></svg>
+  </section>
+
+  <button class="btn primary wide" id="openApp">Open Phalanx app ↗</button>
+  <p class="hint dim small" id="hint" hidden></p>
+
+  <script src="../lib/edition.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!-- title=About;js=about;body= -->
+<main id="page">
+  <section class="card hero">
+    <div>
+      <span class="pill">How Phalanx works</span>
+      <h2 style="font-size:1.7em;margin:10px 0 8px">Three layers watch your browser so you don't have to.</h2>
+      <p style="margin:0 0 10px">Phalanx checks every <b>website</b> before it loads, every <b>download</b> as it arrives, and every <b>page</b> for code that sneaks in after loading. When something looks wrong you get one small alert and three simple choices.</p>
+      <p class="dim" style="margin:0">Everything runs on your own PC. Nothing is uploaded anywhere.</p>
+    </div>
+    <div class="kpis" style="grid-template-columns:1fr 1fr">
+      <div class="kpi"><div class="v">3</div><div class="k">protection layers</div></div>
+      <div class="kpi"><div class="v">0</div><div class="k">bytes sent to the cloud</div></div>
+      <div class="kpi"><div class="v" id="ramKpi">~15</div><div class="k">MB engine memory</div></div>
+      <div class="kpi"><div class="v">3 s</div><div class="k">alert, then out of your way</div></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-head"><h3>Architecture — how the pieces talk</h3><span class="dim" style="font-size:.85em">hover a box</span></div>
+    <div id="arch"></div>
+  </section>
+
+  <div class="grid g2">
+    <section class="card">
+      <h3>How a threat is scanned</h3>
+      <ol class="steps">
+        <li><div><b>Watch.</b> The extension sees a new website address, a new download, or a change inside a page (a form, script, frame or overlay added after loading).</div></li>
+        <li><div><b>Collect evidence.</b> It reads only what matters: the address, the file name and source, or the injected element — never your passwords or page text.</div></li>
+        <li><div><b>Score 0–100.</b> Each warning sign adds points (e.g. "raw IP address" +30, "brand look-alike" +40, "disguised .pdf.exe" +50). Well-known services like Gmail, Meet, Discord and Netflix are trusted.</div></li>
+        <li><div><b>Compare with your sensitivity.</b> Low alerts at ≥70, Medium at ≥45, High at ≥20.</div></li>
+        <li><div><b>Act.</b> High &amp; critical threats can be auto-quarantined instantly; everything else waits for your choice.</div></li>
+      </ol>
+    </section>
+    <section class="card">
+      <h3>The risk scale</h3>
+      <div id="scale"></div>
+      <table class="tbl" style="margin-top:12px" id="scaleTbl"></table>
+    </section>
+  </div>
+
+  <section class="card">
+    <h3>What Phalanx detects</h3>
+    <table class="tbl" id="detectTbl"></table>
+  </section>
+
+  <section class="card">
+    <h3>What happens when something is found</h3>
+    <div id="flow"></div>
+  </section>
+
+  <div class="grid g2">
+    <section class="card">
+      <h3>Light by design</h3>
+      <table class="tbl"><thead><tr><th>Technique</th><th>Why it keeps your PC fast</th></tr></thead><tbody>
+        <tr><td>Idle-time inspection</td><td>Page checks run only when the browser is idle (<span class="code">requestIdleCallback</span>), never during scrolling or typing.</td></tr>
+        <tr><td>Only risky elements</td><td>Looks at forms, scripts, frames and handlers — not every node on the page.</td></tr>
+        <tr><td>Trusted-site light mode</td><td>Gmail, Meet, Discord, Netflix… only get the critical checks.</td></tr>
+        <tr><td>Memory-first storage</td><td>State lives in memory and is saved in batches (the old version wrote to disk on every network request).</td></tr>
+        <tr><td>One grouped alert</td><td>A single 3-second box instead of a stack of Windows notifications.</td></tr>
+        <tr><td>Native engine</td><td>The desktop engine is a single small Go program (~15 MB RAM) that exits when you close it.</td></tr>
+      </tbody></table>
+    </section>
+    <section class="card">
+      <h3>Your privacy</h3>
+      <table class="tbl"><thead><tr><th>Data</th><th>Stored where</th><th>Leaves your PC?</th></tr></thead><tbody>
+        <tr><td>Threat history</td><td>Your Phalanx data folder</td><td style="color:var(--ok)">Never</td></tr>
+        <tr><td>Settings, trusted / blocked sites</td><td>Data folder + browser</td><td style="color:var(--ok)">Never</td></tr>
+        <tr><td>Sign-in passcode</td><td>Salted hash only</td><td style="color:var(--ok)">Never</td></tr>
+        <tr><td>Web pages you visit</td><td>Not stored — only flagged addresses</td><td style="color:var(--ok)">Never</td></tr>
+        <tr><td>Extension ↔ engine link</td><td><span class="code">127.0.0.1:47821</span> (this PC only)</td><td style="color:var(--ok)">Never</td></tr>
+      </tbody></table>
+      <h3 style="margin-top:16px">Honest limits</h3>
+      <ul style="margin:0;padding-left:20px">
+        <li>Not an antivirus: downloads are judged by Chrome Safe Browsing's verdict plus Phalanx's file checks — files are not opened or scanned byte-by-byte.</li>
+        <li>Browser extensions can't read raw network packets; the network graph is a request-rate estimate.</li>
+        <li>Site checks are offline heuristics, not a live threat-intelligence feed.</li>
+        <li>A script that already started running can't be "un-run" — Phalanx removes it and warns you.</li>
+      </ul>
+    </section>
+  </div>
+
+  <section class="card" id="install">
+    <h3>Install guide (Windows)</h3>
+    <div class="grid g2">
+      <ol class="steps">
+        <li><div>Run <span class="code">Phalanx-Setup.exe</span> (or unzip and run <span class="code">Phalanx.exe</span> directly). If Windows SmartScreen appears, choose <i>More info → Run anyway</i>.</div></li>
+        <li><div>Open <span class="code">chrome://extensions</span> (or <span class="code">edge://extensions</span>) and turn on <b>Developer mode</b>.</div></li>
+        <li><div>Click <b>Load unpacked</b> and pick the <span class="code">extension</span> folder inside the Phalanx folder.</div></li>
+        <li><div>Pin the Phalanx icon. The sidebar of this app turns to <b>Extension connected</b> within ~30 seconds.</div></li>
+        <li><div>Open the <b>Test lab</b> from the left menu to see detections live.</div></li>
+      </ol>
+      <div>
+        <p class="dim" style="margin-top:0">The data &amp; cache folder defaults to <span class="code">PhalanxData</span> next to Phalanx.exe and can be moved in Settings → Storage &amp; cache.</p>
+        <div class="row" style="flex-wrap:wrap"><button class="btn" id="openExt">Open extension folder</button><button class="btn" id="copyExt">Copy chrome://extensions</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card" id="credits">
+    <div class="card-head"><h3>Credits</h3><span class="pill" id="edLabel"></span></div>
+    <div class="grid g-1-2" style="align-items:center">
+      <div class="row" style="gap:14px">
+        <div class="avatar" style="width:56px;height:56px;font-size:1.4em" id="credAvatar">S</div>
+        <div><div style="font-weight:700;color:var(--text-strong);font-size:1.1em" id="credName"></div><div class="dim" id="credRole"></div></div>
+      </div>
+      <div>
+        <p style="margin:0 0 10px" id="credText"></p>
+        <div class="row" style="flex-wrap:wrap" id="credLinks"></div>
+      </div>
+    </div>
+    <div id="timeline" style="margin-top:16px"></div>
+  </section>
+</main>

@@ -1,0 +1,38 @@
+<!-- title=History & reports;js=history;body= -->
+<main id="page">
+  <div class="tabs no-print" id="tabs"><button data-t="history" class="on">History</button><button data-t="report">Report analysis</button></div>
+
+  <div class="card no-print" style="padding:12px 16px">
+    <div class="filters">
+      <input type="search" id="q" placeholder="Search title, host, URL…" />
+      <select id="range"><option value="1">Last 24 hours</option><option value="7">Last 7 days</option><option value="30" selected>Last 30 days</option><option value="0">All time</option></select>
+      <select id="kind"><option value="">All types</option><option value="dom">Page tampering</option><option value="site">Websites</option><option value="download">Downloads</option></select>
+      <select id="sev"><option value="">All severities</option><option value="critical">Critical</option><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select>
+      <select id="status"><option value="">All outcomes</option><option value="pending">Pending</option><option value="resolved">Resolved</option><option value="quarantined">Quarantined</option><option value="analysis">Under analysis</option></select>
+      <span class="grow"></span>
+      <button class="btn sm" id="csv">⇩ CSV</button><button class="btn sm" id="json">⇩ JSON</button><button class="btn sm" id="print">🖨 Print / PDF</button>
+    </div>
+  </div>
+
+  <section id="historyTab" class="grid">
+    <div class="card"><div id="tbl"></div><div class="row" style="justify-content:space-between;margin-top:10px"><span class="dim" id="count"></span><div class="row"><button class="btn sm" id="prev">← Prev</button><button class="btn sm" id="next">Next →</button></div></div></div>
+  </section>
+
+  <section id="reportTab" class="grid" hidden>
+    <div class="card"><div class="row" style="flex-wrap:wrap"><div class="grow"><h2 id="repTitle">Security report</h2><div class="dim" id="repSub"></div></div><span class="pill" id="repGrade"></span></div></div>
+    <div class="kpis" id="repKpis"></div>
+    <div class="grid g2">
+      <div class="card"><div class="card-head"><h3>Detections per day</h3></div><div id="repDays"></div></div>
+      <div class="card"><div class="card-head"><h3>Severity mix</h3></div><div id="repSev"></div></div>
+    </div>
+    <div class="grid g2">
+      <div class="card"><div class="card-head"><h3>Threat categories</h3></div><div id="repCat"></div></div>
+      <div class="card"><div class="card-head"><h3>How threats were handled</h3></div><div id="repOut"></div></div>
+    </div>
+    <div class="grid g2">
+      <div class="card"><div class="card-head"><h3>Most frequent sources</h3></div><div id="repHosts"></div></div>
+      <div class="card"><div class="card-head"><h3>Findings & recommendations</h3></div><ul id="repRecs" style="margin:0;padding-left:20px"></ul></div>
+    </div>
+    <div class="card"><div class="card-head"><h3>Most serious threats in this period</h3></div><div id="repTop"></div></div>
+  </section>
+</main>

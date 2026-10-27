@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dashboard · Phalanx</title>
+<link rel="icon" href="/img/icon.png" />
+<link rel="stylesheet" href="/shared/palette.css" />
+<link rel="stylesheet" href="/shared/ui.css" />
+<link rel="stylesheet" href="/css/app.css" />
+<script src="/shared/edition.js"></script>
+<script src="/js/boot.js"></script>
+</head>
+<body>
+<main id="page">
+  <div class="grid g-1-2">
+    <div class="card" id="posture">
+      <div class="card-head"><h3>Protection posture</h3><span class="pill" id="postureLabel">—</span></div>
+      <div style="display:grid;justify-items:center;gap:6px">
+        <div id="postureGauge"></div>
+        <div id="postureList" style="width:100%"></div>
+      </div>
+    </div>
+    <div class="grid" style="gap:12px;align-content:start">
+      <div class="kpis" id="kpis"></div>
+      <div class="card">
+        <div class="card-head"><h3>Detections — last 24 hours</h3><span class="dim" style="font-size:.85em">per hour</span></div>
+        <div id="hourChart"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid g2">
+    <div class="card">
+      <div class="card-head"><h3>Browser network activity</h3><span class="dim mono" style="font-size:.85em" id="netNow"></span></div>
+      <div id="netChart"></div>
+      <p class="dim" style="font-size:.8em;margin:8px 0 0">Requests per minute seen by the extension (last 60 min). A browser extension cannot read raw packets — this is a request-rate estimate.</p>
+    </div>
+    <div class="card">
+      <div class="card-head"><h3>Threats by severity</h3><a href="/history.html?tab=report">Full report →</a></div>
+      <div id="sevChart"></div>
+    </div>
+  </div>
+
+  <div class="grid g2">
+    <div class="card">
+      <div class="card-head"><h3>What was detected</h3></div>
+      <div id="kindChart"></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><h3>Top risky sources</h3></div>
+      <div id="topHosts"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><h3>Recent activity</h3><a href="/live.html">Live threats →</a></div>
+    <div id="recent"></div>
+  </div>
+</main>
+<script src="/shared/intel.js"></script>
+<script src="/shared/analysis.js"></script>
+<script src="/shared/report-view.js"></script>
+<script src="/js/charts.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/dashboard.js"></script>
+</body>
+</html>

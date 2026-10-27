@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<title>Threat analysis — Phalanx</title>
+<link rel="stylesheet" href="../lib/palette.css" />
+<link rel="stylesheet" href="../lib/ui.css" />
+<style>
+  body { padding: 24px; }
+  main { max-width: 980px; margin: 0 auto; display: grid; gap: 14px; }
+  .note { border-left: 3px solid var(--accent); }
+</style>
+</head>
+<body>
+  <main>
+    <div class="row"><span class="display" style="font-weight:800;color:var(--accent)">Phalanx</span><span class="dim">· Threat analysis (offline view)</span></div>
+    <div class="card note dim" style="font-size:.9em">The Phalanx desktop app isn't running, so this is the built-in analysis. Start the app for full history, reports and settings.</div>
+    <div id="report"></div>
+  </main>
+  <script src="../lib/edition.js"></script>
+  <script src="../lib/intel.js"></script>
+  <script src="../lib/analysis.js"></script>
+  <script src="../lib/report-view.js"></script>
+  <script src="analysis.js"></script>
+</body>
+</html>

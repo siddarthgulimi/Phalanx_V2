@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Live threats · Phalanx</title>
+<link rel="icon" href="/img/icon.png" />
+<link rel="stylesheet" href="/shared/palette.css" />
+<link rel="stylesheet" href="/shared/ui.css" />
+<link rel="stylesheet" href="/css/app.css" />
+<script src="/shared/edition.js"></script>
+<script src="/js/boot.js"></script>
+</head>
+<body>
+<main id="page">
+  <div class="card" style="padding:12px 16px">
+    <div class="row" style="flex-wrap:wrap;gap:12px">
+      <div class="seg" id="kindSeg">
+        <button data-k="" class="on">All</button><button data-k="dom">Page tampering</button><button data-k="site">Websites</button><button data-k="download">Downloads</button>
+      </div>
+      <span class="grow"></span>
+      <button class="btn sm" id="resolveLow">✓ Resolve all low</button>
+      <button class="btn sm danger" id="quarHigh">⛔ Quarantine all high & critical</button>
+    </div>
+  </div>
+  <div class="card" style="background:transparent;border:0;padding:0">
+    <div class="card-head" style="padding:0 2px"><h3 id="pendTitle">Waiting for your decision</h3><span class="dim" style="font-size:.85em">Every alert gets three choices: Resolved, Quarantine or Threat analysis</span></div>
+    <div id="pending"></div>
+  </div>
+  <div class="card">
+    <div class="card-head"><h3>Recently handled</h3><a href="/history.html">Full history →</a></div>
+    <div id="handled"></div>
+  </div>
+</main>
+<script src="/shared/intel.js"></script>
+<script src="/shared/analysis.js"></script>
+<script src="/shared/report-view.js"></script>
+<script src="/js/charts.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/live.js"></script>
+</body>
+</html>

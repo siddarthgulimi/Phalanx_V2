@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Phalanx Test Lab</title>
+<link rel="icon" href="/img/icon.png" />
+<link rel="stylesheet" href="/shared/palette.css" />
+<link rel="stylesheet" href="/shared/ui.css" />
+<script src="/shared/edition.js"></script>
+<style>
+  body { padding: 24px; }
+  main { max-width: 1100px; margin: 0 auto; display: grid; gap: 16px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 12px; }
+  .test { display: grid; gap: 6px; align-content: start; }
+  .test h4 { font-size: 1em; }
+  .lv { display: flex; gap: 4px; }
+  .lv span { font-family: var(--font-mono); font-size: .7em; padding: 1px 6px; border-radius: 999px; border: 1px solid var(--border-strong); color: var(--text-dim); }
+  .lv span.y { color: var(--ok); border-color: var(--ok); }
+  .res { font-size: .85em; min-height: 1.3em; font-weight: 600; }
+  .res.ok { color: var(--ok); } .res.no { color: var(--text-dim); }
+  #staticForm { display: flex; gap: 8px; flex-wrap: wrap; }
+  .warn { border-left: 3px solid var(--sev-medium); }
+</style>
+</head>
+<body>
+<main>
+  <div class="row" style="flex-wrap:wrap">
+    <div class="grow"><h1>Phalanx Test Lab</h1><div class="dim">Safe, simulated attacks. Open this page in the browser where the Phalanx extension is installed.</div></div>
+    <span class="chip plain" id="extState">checking extension…</span>
+  </div>
+  <div class="card warn" style="font-size:.92em">
+    <b>How to demo:</b> pick a sensitivity in the Phalanx app (Settings → Protection), then click the buttons below. Badges show which sensitivity
+    levels should catch each test (<b>L</b>ow / <b>M</b>edium / <b>H</b>igh). Nothing here is dangerous: scripts are never executed, frames point to
+    non-existent <span class="code">.invalid</span> domains, and "downloads" are plain-text files.
+  </div>
+
+  <section>
+    <h2 style="margin-bottom:10px">1 · Page tampering (DOM)</h2>
+    <div class="card" style="margin-bottom:12px"><div class="label" style="margin-bottom:6px">A normal login form that was part of the original page</div>
+      <form id="staticForm" action="/testlab/login" onsubmit="return false"><input type="text" placeholder="email" /><input type="password" placeholder="password" /><button class="btn sm" type="button">Sign in</button></form></div>
+    <div class="grid" id="domTests"></div>
+  </section>
+
+  <section>
+    <h2 style="margin-bottom:10px">2 · Risky websites (opens a new tab)</h2>
+    <div class="grid" id="siteTests"></div>
+  </section>
+
+  <section>
+    <h2 style="margin-bottom:10px">3 · Risky downloads (harmless text files)</h2>
+    <div class="grid" id="dlTests"></div>
+  </section>
+</main>
+<script src="/testlab/lab.js"></script>
+</body>
+</html>

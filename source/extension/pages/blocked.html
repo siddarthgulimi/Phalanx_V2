@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<title>Blocked by Phalanx</title>
+<link rel="stylesheet" href="../lib/palette.css" />
+<link rel="stylesheet" href="../lib/ui.css" />
+<style>
+  body { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+  .box { max-width: 640px; width: 100%; display: grid; gap: 14px; }
+  .shield { font-size: 42px; color: var(--sev-high); line-height: 1; }
+  h1 { font-size: 1.6em; }
+  .host { font-family: var(--font-mono); color: var(--text-strong); word-break: break-all; }
+  ul { margin: 0; padding-left: 20px; }
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+  <main class="box">
+    <div class="shield">⛔</div>
+    <h1>Phalanx blocked this site</h1>
+    <p class="dim" style="margin:0">You are protected — the page was stopped before it loaded.</p>
+    <div class="card">
+      <div class="row" style="flex-wrap:wrap;gap:8px;margin-bottom:8px">
+        <span class="chip" id="sev">high</span><span class="mono dim" id="score"></span><span class="label" id="cat"></span>
+      </div>
+      <div class="host" id="host"></div>
+      <h3 style="margin-top:12px">Why?</h3>
+      <ul id="reasons"></ul>
+    </div>
+    <div class="actions">
+      <button class="btn primary" id="back">← Take me back to safety</button>
+      <button class="btn" id="analyze">🔍 Threat analysis</button>
+      <button class="btn danger" id="proceed">I trust this site — continue</button>
+    </div>
+    <p class="dim" style="font-size:.85em;margin:0">"Continue" adds the site to your trusted list. You can change this later in the Phalanx app → Settings → Trusted &amp; blocked sites.</p>
+  </main>
+  <script src="../lib/edition.js"></script>
+  <script src="blocked.js"></script>
+</body>
+</html>

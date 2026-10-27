@@ -1,0 +1,47 @@
+PHALANX 2.0 ({{EDITION}} edition) - INSTALLATION GUIDE
+======================================================
+
+A. Install the desktop app
+--------------------------
+Option 1 (recommended): double-click Phalanx-Setup.exe
+   - Installs to %LOCALAPPDATA%\Programs\Phalanx (no admin rights needed)
+   - Creates "Phalanx" shortcuts on the desktop and in the Start menu
+Option 2 (portable): double-click Phalanx.exe in this folder
+
+If Windows shows "Windows protected your PC" (SmartScreen), click
+"More info" -> "Run anyway". The app is not code-signed yet.
+
+On first start Phalanx opens its own window and asks for a name and an
+optional passcode.
+
+B. Install the browser extension (Chrome, Edge or Brave)
+--------------------------------------------------------
+1. Open chrome://extensions   (Edge: edge://extensions)
+2. Switch ON "Developer mode" (top-right).
+3. Click "Load unpacked".
+4. Select the "extension" folder:
+     - installed version: %LOCALAPPDATA%\Programs\Phalanx\extension
+     - portable version : the "extension" folder next to Phalanx.exe
+5. Pin the Phalanx icon to the toolbar.
+6. Within ~30 seconds the app sidebar shows "Extension connected".
+
+If you had Phalanx 1.0 loaded, REMOVE the old extension first.
+
+C. Try it (Test lab)
+--------------------
+In the app, click "Test lab" in the left menu. It opens a safe practice
+page in your normal browser. Each button simulates one attack; the badges
+show which sensitivity (Low / Medium / High) should catch it.
+
+D. Uninstall
+------------
+Settings -> Apps -> Phalanx -> Uninstall (asks whether to keep your data),
+then remove the extension from chrome://extensions.
+
+E. Troubleshooting
+------------------
+- "Port 47821 is busy": another copy is running or another program uses
+  the port. Close it and start Phalanx again.
+- Extension shows "App offline": start Phalanx.exe. The extension keeps
+  protecting you meanwhile and syncs its alerts when the app starts.
+- Logs: <data folder>\logs\engine.log (Settings -> Storage & cache -> Open folder)
